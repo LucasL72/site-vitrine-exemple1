@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import RealisationForm from './RealisationForm';
-
-const API_URL = 'http://localhost:5000/realisations';
+import { getRealisation, saveRealisation } from './services/api';
 
 function RealisationFormPage() {
   const { id } = useParams();
@@ -14,10 +13,7 @@ function RealisationFormPage() {
     if (id) {
       const load = async () => {
         try {
-          const response = await fetch(`${API_URL}/${id}`, {
-            headers: { Authorization: `Bearer ${token}` }
-          });
-          const data = await response.json();
+          const data = await getRealisation(id, token);
           setInitialData(data);
         } catch (err) {
           console.error('Erreur chargement réalisation', err);
@@ -29,16 +25,7 @@ function RealisationFormPage() {
 
   const handleSubmit = async (realisation) => {
     try {
-      const method = id ? 'PUT' : 'POST';
-      const url = id ? `${API_URL}/${id}` : API_URL;
-      await fetch(url, {
-        method,
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${token}`
-        },
-        body: JSON.stringify(realisation)
-      });
+      await saveRealisation(realisation, token, id);
       navigate('/dashboard');
     } catch (err) {
       console.error('Erreur sauvegarde réalisation', err);

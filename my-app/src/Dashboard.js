@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import RealisationsList from './RealisationsList';
-
-const API_URL = 'http://localhost:5000/realisations';
+import { getRealisations, deleteRealisation } from './services/api';
 
 function Dashboard() {
   const [realisations, setRealisations] = useState([]);
@@ -11,10 +10,7 @@ function Dashboard() {
 
   const loadRealisations = async () => {
     try {
-      const response = await fetch(API_URL, {
-        headers: { Authorization: `Bearer ${token}` }
-      });
-      const data = await response.json();
+      const data = await getRealisations(token);
       setRealisations(data);
     } catch (err) {
       console.error('Erreur chargement réalisations', err);
@@ -27,10 +23,7 @@ function Dashboard() {
 
   const handleDelete = async (id) => {
     try {
-      await fetch(`${API_URL}/${id}`, {
-        method: 'DELETE',
-        headers: { Authorization: `Bearer ${token}` }
-      });
+      await deleteRealisation(id, token);
       loadRealisations();
     } catch (err) {
       console.error('Erreur suppression réalisation', err);

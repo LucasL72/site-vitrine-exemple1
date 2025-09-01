@@ -1,8 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import RealisationsList from './RealisationsList';
 import RealisationForm from './RealisationForm';
-
-const API_URL = 'http://localhost:5000/realisations';
+import {
+  getRealisations,
+  saveRealisation,
+  deleteRealisation
+} from './services/api';
 
 function Realisations() {
   const [realisations, setRealisations] = useState([]);
@@ -10,8 +13,7 @@ function Realisations() {
 
   const loadRealisations = async () => {
     try {
-      const response = await fetch(API_URL);
-      const data = await response.json();
+      const data = await getRealisations();
       setRealisations(data);
     } catch (err) {
       console.error('Erreur chargement réalisations', err);
@@ -24,13 +26,7 @@ function Realisations() {
 
   const handleSubmit = async (realisation) => {
     try {
-      const method = editing ? 'PUT' : 'POST';
-      const url = editing ? `${API_URL}/${editing.id}` : API_URL;
-      await fetch(url, {
-        method,
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(realisation),
-      });
+      await saveRealisation(realisation, null, editing && editing.id);
       setEditing(null);
       loadRealisations();
     } catch (err) {
@@ -40,7 +36,7 @@ function Realisations() {
 
   const handleDelete = async (id) => {
     try {
-      await fetch(`${API_URL}/${id}`, { method: 'DELETE' });
+      await deleteRealisation(id);
       loadRealisations();
     } catch (err) {
       console.error('Erreur suppression réalisation', err);
