@@ -15,8 +15,12 @@ function RealisationsList({ realisations, onEdit, onDelete }) {
             <img src={realisation.image} alt={realisation.title} width="200" />
           )}
           <p>{realisation.date ? new Date(realisation.date).toLocaleDateString() : ''}</p>
-          <button onClick={() => onEdit(realisation)}>Modifier</button>
-          <button onClick={() => onDelete(realisation.id)}>Supprimer</button>
+          {onEdit && (
+            <button onClick={() => onEdit(realisation)}>Modifier</button>
+          )}
+          {onDelete && (
+            <button onClick={() => onDelete(realisation.id)}>Supprimer</button>
+          )}
         </div>
       ))}
     </div>
