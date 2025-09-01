@@ -38,6 +38,15 @@ function verifyToken(req, res, next) {
   });
 }
 
+function sanitizeInput(str) {
+  return String(str).replace(/[<>&]/g, '').trim();
+}
+
+function isValidEmail(email) {
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  return emailRegex.test(email);
+}
+
 app.post('/login', (req, res) => {
   const { email, password } = req.body;
   const sql = 'SELECT * FROM users WHERE email = ? AND password = ?';
@@ -52,6 +61,38 @@ app.post('/login', (req, res) => {
     const token = jwt.sign(user, process.env.JWT_SECRET, { expiresIn: '1h' });
     res.json({ token });
   });
+});
+
+app.post('/contact', (req, res) => {
+  const { name, email, message } = req.body;
+
+  if (!name || !email || !message) {
+    return res
+      .status(400)
+      .json({ message: 'Nom, email et message sont requis' });
+  }
+
+  if (!isValidEmail(email)) {
+    return res.status(400).json({ message: 'Email invalide' });
+  }
+
+  const sanitizedName = sanitizeInput(name);
+  const sanitizedEmail = sanitizeInput(email);
+  const sanitizedMessage = sanitizeInput(message);
+
+  const sql =
+    'INSERT INTO contact_messages (name, email, message) VALUES (?, ?, ?)';
+  db.query(
+    sql,
+    [sanitizedName, sanitizedEmail, sanitizedMessage],
+    (err, result) => {
+      if (err) {
+        console.error("Erreur lors de l'enregistrement du message de contact:", err);
+        return res.status(500).json({ error: 'Erreur serveur' });
+      }
+      res.status(201).json({ id: result.insertId });
+    }
+  );
 });
 
 app.get('/realisations', (req, res) => {
