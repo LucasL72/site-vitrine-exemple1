@@ -1,0 +1,23 @@
+@mixin button($bg-color, $color: #fff) {
+  background-color: $bg-color;
+  color: $color;
+  padding: $spacing-sm $spacing-md;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  &:hover {
+    opacity: 0.9;
+  }
+}
+
+@mixin section($padding: $spacing-md) {
+  padding: $padding;
+  margin-bottom: $spacing-lg;
+}
+
+@mixin title($size: 2rem, $color: $text-color) {
+  font-family: $font-family;
+  font-size: $size;
+  color: $color;
+  margin-bottom: $spacing-md;
+}
