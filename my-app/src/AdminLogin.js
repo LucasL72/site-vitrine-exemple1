@@ -20,24 +20,26 @@ function AdminLogin({ onLogin }) {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="admin-login-form">
-      <h2>Connexion Admin</h2>
-      <input
-        type="email"
-        placeholder="Adresse e-mail"
-        value={loginEmail}
-        onChange={(e) => setLoginEmail(e.target.value)}
-        required
-      />
-      <input
-        type="password"
-        placeholder="Mot de passe"
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-        required
-      />
-      <button type="submit">Se connecter</button>
-    </form>
+    <div className="section">
+      <form onSubmit={handleSubmit} className="admin-login-form">
+        <h2 className="title">Connexion Admin</h2>
+        <input
+          type="email"
+          placeholder="Adresse e-mail"
+          value={loginEmail}
+          onChange={(e) => setLoginEmail(e.target.value)}
+          required
+        />
+        <input
+          type="password"
+          placeholder="Mot de passe"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          required
+        />
+        <button type="submit" className="btn-custom">Se connecter</button>
+      </form>
+    </div>
   );
 }
 

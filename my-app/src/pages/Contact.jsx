@@ -22,7 +22,7 @@ const Contact = () => {
   };
 
   return (
-    <div className="container mt-4 section">
+    <div className="container section">
       <div className="row justify-content-center mb-4">
         <div className="col-12 text-center">
           <h2 className="title">Contact</h2>
