@@ -46,6 +46,13 @@ function NavBar({ token, onLogout }) {
               Contact
             </Link>
           </li>
+          {token && (
+            <li className="nav-item">
+              <Link className="nav-link" to="/dashboard">
+                Dashboard
+              </Link>
+            </li>
+          )}
         </ul>
         <div className="d-flex align-items-center">
           <div className="form-check form-switch me-3">
