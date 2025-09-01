@@ -81,6 +81,16 @@ Les champs sont validés et nettoyés avant l'enregistrement en base de données
 - `400` : données invalides.
 - `500` : erreur serveur.
 
+## Réalisations
+
+L'API fournit une route `GET /realisations/:id` pour récupérer une réalisation spécifique.
+
+### Réponses
+
+- `200` : réalisation trouvée.
+- `404` : réalisation introuvable.
+- `500` : erreur serveur.
+
 ## Scripts disponibles
 
 ### API (`my-api`)

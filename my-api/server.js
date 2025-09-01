@@ -105,6 +105,20 @@ app.get('/realisations', (req, res) => {
   });
 });
 
+app.get('/realisations/:id', (req, res) => {
+  const { id } = req.params;
+  const sql = 'SELECT * FROM realisations WHERE id = ?';
+  db.query(sql, [id], (err, results) => {
+    if (err) {
+      return res.status(500).json({ error: err });
+    }
+    if (results.length === 0) {
+      return res.status(404).json({ message: 'R\u00e9alisation introuvable' });
+    }
+    res.json(results[0]);
+  });
+});
+
 app.post('/realisations', verifyToken, (req, res) => {
   const data = req.body;
   const sql = 'INSERT INTO realisations SET ?';
