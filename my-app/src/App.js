@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import Services from './Services';
 import Realisations from './Realisations';
 import APropos from './APropos';
-import Contact from './Contact';
+import Contact from './pages/Contact';
 import './App.css';
 
 function App() {
