@@ -37,3 +37,14 @@
   }
 }
 
+.btn-custom {
+  @include button($primary-color);
+}
+
+.section {
+  @include section;
+}
+
+.title {
+  @include title;
+}

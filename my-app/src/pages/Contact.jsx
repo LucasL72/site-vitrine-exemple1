@@ -22,8 +22,8 @@ const Contact = () => {
   };
 
   return (
-    <div className="container mt-4">
-      <h2>Contact</h2>
+    <div className="container mt-4 section">
+      <h2 className="title">Contact</h2>
       {notification && (
         <div className={`alert alert-${notification.type}`} role="alert">
           {notification.text}
@@ -63,7 +63,7 @@ const Contact = () => {
             required
           ></textarea>
         </div>
-        <button type="submit" className="btn btn-primary">Envoyer</button>
+        <button type="submit" className="btn-custom">Envoyer</button>
       </form>
     </div>
   );

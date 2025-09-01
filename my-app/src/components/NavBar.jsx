@@ -15,10 +15,11 @@ function NavBar({ token, onLogout }) {
   const toggleDarkMode = () => setDarkMode((prev) => !prev);
 
   return (
-    <nav className="navbar navbar-expand-lg bg-light">
+    <nav className="navbar navbar-expand-lg bg-light section">
       <div className="container-fluid">
-        <Link className="navbar-brand" to="/">
+        <Link className="navbar-brand d-flex align-items-center" to="/">
           <img src={logo} alt="Logo" height="40" />
+            <span className="ms-2 title">MonSite</span>
         </Link>
         <ul className="navbar-nav mx-auto mb-2 mb-lg-0">
           <li className="nav-item">
@@ -68,11 +69,11 @@ function NavBar({ token, onLogout }) {
             </label>
           </div>
           {token ? (
-            <button className="btn btn-outline-danger" onClick={onLogout}>
+            <button className="btn-custom" onClick={onLogout}>
               Déconnexion
             </button>
           ) : (
-            <Link className="btn btn-outline-primary" to="/admin/login">
+            <Link className="btn-custom" to="/admin/login">
               Admin
             </Link>
           )}
