@@ -48,3 +48,17 @@
 .title {
   @include title;
 }
+
+.form-control {
+  transition: border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+
+  &:focus {
+    border-color: $primary-color;
+    box-shadow: 0 0 0 0.2rem rgba($primary-color, 0.25);
+  }
+
+  &:invalid {
+    border-color: $danger-color;
+    box-shadow: 0 0 0 0.2rem rgba($danger-color, 0.25);
+  }
+}

@@ -33,50 +33,54 @@ const Contact = () => {
           {notification.text}
         </div>
       )}
-      <form onSubmit={handleSubmit}>
-        <div className="row">
-          <div className="col-12 col-md-6 mb-3">
-            <label htmlFor="name" className="form-label">Nom</label>
-            <input
-              type="text"
-              className="form-control"
-              id="name"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-              required
-            />
-          </div>
-          <div className="col-12 col-md-6 mb-3">
-            <label htmlFor="email" className="form-label">E-mail</label>
-            <input
-              type="email"
-              className="form-control"
-              id="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              required
-            />
-          </div>
+      <div className="row">
+        <div className="col-12 col-md-6 mx-auto">
+          <form onSubmit={handleSubmit}>
+            <div className="row">
+              <div className="col-12 col-md-6">
+                <label htmlFor="name" className="form-label">Nom</label>
+                <input
+                  type="text"
+                  className="form-control mb-3"
+                  id="name"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                  required
+                />
+              </div>
+              <div className="col-12 col-md-6">
+                <label htmlFor="email" className="form-label">E-mail</label>
+                <input
+                  type="email"
+                  className="form-control mb-3"
+                  id="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  required
+                />
+              </div>
+            </div>
+            <div className="row">
+              <div className="col-12">
+                <label htmlFor="message" className="form-label">Message</label>
+                <textarea
+                  className="form-control mb-3"
+                  id="message"
+                  rows="5"
+                  value={message}
+                  onChange={(e) => setMessage(e.target.value)}
+                  required
+                ></textarea>
+              </div>
+            </div>
+            <div className="row">
+              <div className="col-12 text-center">
+                <button type="submit" className="btn-custom">Envoyer</button>
+              </div>
+            </div>
+          </form>
         </div>
-        <div className="row">
-          <div className="col-12 mb-3">
-            <label htmlFor="message" className="form-label">Message</label>
-            <textarea
-              className="form-control"
-              id="message"
-              rows="5"
-              value={message}
-              onChange={(e) => setMessage(e.target.value)}
-              required
-            ></textarea>
-          </div>
-        </div>
-        <div className="row">
-          <div className="col-12 text-center">
-            <button type="submit" className="btn-custom">Envoyer</button>
-          </div>
-        </div>
-      </form>
+      </div>
     </div>
   );
 };
