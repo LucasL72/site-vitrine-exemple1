@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { BrowserRouter as Router, Routes, Route, Link, Navigate } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import Services from './Services';
 import Realisations from './Realisations';
 import APropos from './APropos';
@@ -7,6 +7,7 @@ import Contact from './pages/Contact';
 import AdminLogin from './AdminLogin';
 import Dashboard from './Dashboard';
 import RealisationFormPage from './RealisationFormPage';
+import NavBar from './components/NavBar';
 import './App.css';
 
 function App() {
@@ -25,21 +26,7 @@ function App() {
   return (
     <Router>
       <div className="App">
-        <nav>
-          <ul>
-            <li><Link to="/">Accueil</Link></li>
-            <li><Link to="/services">Services</Link></li>
-            <li><Link to="/realisations">Réalisations</Link></li>
-            <li><Link to="/apropos">À propos</Link></li>
-            <li><Link to="/contact">Contact</Link></li>
-            {token && <li><Link to="/dashboard">Admin</Link></li>}
-            {token && (
-              <li>
-                <button onClick={handleLogout}>Déconnexion</button>
-              </li>
-            )}
-          </ul>
-        </nav>
+        <NavBar token={token} onLogout={handleLogout} />
         <Routes>
           <Route path="/" element={<div>Bienvenue sur notre site</div>} />
           <Route path="/services" element={<Services />} />
