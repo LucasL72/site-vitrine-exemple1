@@ -43,6 +43,8 @@ Le projet utilise le port **5000** pour l'API. L'application React consomme cett
 
 L'espace d'administration utilise désormais l'**email** et le mot de passe de l'utilisateur pour se connecter.
 
+Les mots de passe sont hachés avec `bcrypt` avant d'être stockés en base, et la connexion vérifie ce hash.
+
 ### Migration de la table `users`
 
 Une migration SQL est fournie pour renommer la colonne `username` en `email` et ajouter une contrainte d'unicité :
@@ -57,6 +59,18 @@ Exécuter cette migration avec :
 
 ```bash
 mysql -u <user> -p <db_name> < my-api/migrations/001_use_email_for_admin.sql
+```
+
+### Création d'un administrateur
+
+Envoyer une requête `POST /users` avec un corps JSON `{ "email": "admin@example.com", "password": "motdepasse" }` pour créer un compte administrateur. Le mot de passe est automatiquement haché avec bcrypt.
+
+Exemple :
+
+```bash
+curl -X POST http://localhost:5000/users \
+  -H "Content-Type: application/json" \
+  -d '{"email":"admin@example.com","password":"secret"}'
 ```
 
 ## Formulaire de contact
