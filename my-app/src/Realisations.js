@@ -18,10 +18,10 @@ function Realisations() {
   }, []);
 
   return (
-    <div className="container mt-4">
-      <div className="row mb-4">
+    <div className="container section">
+      <div className="row">
         <div className="col-12 text-center">
-          <h2>Réalisations</h2>
+          <h2 className="title">Réalisations</h2>
         </div>
       </div>
       <RealisationsList realisations={realisations} />

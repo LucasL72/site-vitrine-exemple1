@@ -131,3 +131,14 @@ site-vitrine-exemple1/
 ├── LICENSE
 └── README.md
 ```
+
+## Breakpoints CSS
+
+Les mixins SCSS utilisent les largeurs suivantes :
+
+| Nom | Largeur minimale |
+|-----|------------------|
+| `sm` | 576 px |
+| `md` | 768 px |
+| `lg` | 992 px |
+| `xl` | 1200 px |

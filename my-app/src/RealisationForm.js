@@ -58,9 +58,9 @@ function RealisationForm({ onSubmit, initialData, onCancel }) {
         onChange={handleChange}
         required
       />
-      <button type="submit">Enregistrer</button>
+      <button type="submit" className="btn-custom">Enregistrer</button>
       {onCancel && (
-        <button type="button" onClick={onCancel}>
+        <button type="button" className="btn-custom" onClick={onCancel}>
           Annuler
         </button>
       )}

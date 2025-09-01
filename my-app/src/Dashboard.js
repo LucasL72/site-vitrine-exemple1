@@ -31,9 +31,11 @@ function Dashboard() {
   };
 
   return (
-    <div>
-      <h2>Dashboard</h2>
-      <button onClick={() => navigate('/dashboard/new')}>Ajouter une réalisation</button>
+    <div className="section">
+      <h2 className="title">Dashboard</h2>
+      <button className="btn-custom" onClick={() => navigate('/dashboard/new')}>
+        Ajouter une réalisation
+      </button>
       <RealisationsList
         realisations={realisations}
         onEdit={(r) => navigate(`/dashboard/edit/${r.id}`)}

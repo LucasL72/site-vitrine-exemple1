@@ -33,8 +33,8 @@ function RealisationFormPage() {
   };
 
   return (
-    <div>
-      <h2>{id ? 'Modifier' : 'Ajouter'} une réalisation</h2>
+    <div className="section">
+      <h2 className="title">{id ? 'Modifier' : 'Ajouter'} une réalisation</h2>
       <RealisationForm
         onSubmit={handleSubmit}
         initialData={initialData}

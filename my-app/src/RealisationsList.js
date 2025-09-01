@@ -6,33 +6,31 @@ function RealisationsList({ realisations, onEdit, onDelete }) {
   }
 
   return (
-    <div className="row">
+    <div className="responsive-grid">
       {realisations.map((realisation) => (
-        <div key={realisation.id} className="col-12 col-md-6 col-lg-4 mb-4">
-          <div className="p-3 h-100 border text-center">
-            <h3 className="h5 mb-2">{realisation.title}</h3>
-            <p className="mb-2">{realisation.content}</p>
-            {realisation.image && (
-              <img
-                src={realisation.image}
-                alt={realisation.title}
-                className="img-fluid mb-2"
-              />
-            )}
-            <p className="mb-2">
-              {realisation.date ? new Date(realisation.date).toLocaleDateString() : ''}
-            </p>
-            {onEdit && (
-              <button className="btn btn-sm btn-primary me-2" onClick={() => onEdit(realisation)}>
-                Modifier
-              </button>
-            )}
-            {onDelete && (
-              <button className="btn btn-sm btn-danger" onClick={() => onDelete(realisation.id)}>
-                Supprimer
-              </button>
-            )}
-          </div>
+        <div key={realisation.id} className="p-3 h-100 border text-center">
+          <h3 className="h5 mb-2">{realisation.title}</h3>
+          <p className="mb-2">{realisation.content}</p>
+          {realisation.image && (
+            <img
+              src={realisation.image}
+              alt={realisation.title}
+              className="img-fluid mb-2"
+            />
+          )}
+          <p className="mb-2">
+            {realisation.date ? new Date(realisation.date).toLocaleDateString() : ''}
+          </p>
+          {onEdit && (
+            <button className="btn btn-sm btn-primary me-2" onClick={() => onEdit(realisation)}>
+              Modifier
+            </button>
+          )}
+          {onDelete && (
+            <button className="btn btn-sm btn-danger" onClick={() => onDelete(realisation.id)}>
+              Supprimer
+            </button>
+          )}
         </div>
       ))}
     </div>
