@@ -2,6 +2,7 @@ require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
 const mysql = require('mysql');
+const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
 const app = express();
@@ -47,19 +48,46 @@ function isValidEmail(email) {
   return emailRegex.test(email);
 }
 
+app.post('/users', (req, res) => {
+  const { email, password } = req.body;
+  if (!email || !password) {
+    return res.status(400).json({ message: 'Email et mot de passe requis' });
+  }
+  bcrypt.hash(password, 10, (err, hash) => {
+    if (err) {
+      return res.status(500).json({ error: err });
+    }
+    const sql = 'INSERT INTO users (email, password) VALUES (?, ?)';
+    db.query(sql, [email, hash], (err, result) => {
+      if (err) {
+        if (err.code === 'ER_DUP_ENTRY') {
+          return res.status(409).json({ message: 'Email déjà utilisé' });
+        }
+        return res.status(500).json({ error: err });
+      }
+      res.status(201).json({ id: result.insertId, email });
+    });
+  });
+});
+
 app.post('/login', (req, res) => {
   const { email, password } = req.body;
-  const sql = 'SELECT * FROM users WHERE email = ? AND password = ?';
-  db.query(sql, [email, password], (err, results) => {
+  const sql = 'SELECT * FROM users WHERE email = ?';
+  db.query(sql, [email], (err, results) => {
     if (err) {
       return res.status(500).json({ error: err });
     }
     if (results.length === 0) {
       return res.status(401).json({ message: 'Identifiants invalides' });
     }
-    const user = { id: results[0].id, email: results[0].email };
-    const token = jwt.sign(user, process.env.JWT_SECRET, { expiresIn: '1h' });
-    res.json({ token });
+    bcrypt.compare(password, results[0].password, (err, isMatch) => {
+      if (err || !isMatch) {
+        return res.status(401).json({ message: 'Identifiants invalides' });
+      }
+      const user = { id: results[0].id, email: results[0].email };
+      const token = jwt.sign(user, process.env.JWT_SECRET, { expiresIn: '1h' });
+      res.json({ token });
+    });
   });
 });
 
