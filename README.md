@@ -35,6 +35,10 @@ npm start
 | `PORT` | Port d'écoute de l'API |
 | `REACT_APP_API_URL` | URL de l'API consommée par l'application React |
 
+### Port par défaut
+
+Le projet utilise le port **5000** pour l'API. L'application React consomme cette API via l'URL `http://localhost:5000` définie dans `REACT_APP_API_URL`.
+
 ## Scripts disponibles
 
 ### API (`my-api`)
