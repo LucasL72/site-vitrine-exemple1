@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-
-const LOGIN_URL = 'http://localhost:5000/login';
+import { login } from './services/api';
 
 function AdminLogin({ onLogin }) {
   const [email, setEmail] = useState('');
@@ -11,15 +10,7 @@ function AdminLogin({ onLogin }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch(LOGIN_URL, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email, password })
-      });
-      if (!response.ok) {
-        throw new Error('Erreur de connexion');
-      }
-      const data = await response.json();
+      const data = await login({ email, password });
       localStorage.setItem('token', data.token);
       onLogin && onLogin(data.token);
       navigate('/dashboard');

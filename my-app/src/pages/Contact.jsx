@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { sendContact } from '../services/api';
 
 const Contact = () => {
   const [name, setName] = useState('');
@@ -9,20 +10,12 @@ const Contact = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch('http://localhost:5000/contact', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ name, email, message })
-      });
+      await sendContact({ name, email, message });
 
-      if (response.ok) {
-        setNotification({ type: 'success', text: 'Votre message a été envoyé.' });
-        setName('');
-        setEmail('');
-        setMessage('');
-      } else {
-        setNotification({ type: 'danger', text: "Une erreur s'est produite. Veuillez réessayer." });
-      }
+      setNotification({ type: 'success', text: 'Votre message a été envoyé.' });
+      setName('');
+      setEmail('');
+      setMessage('');
     } catch (err) {
       setNotification({ type: 'danger', text: "Une erreur s'est produite. Veuillez réessayer." });
     }
