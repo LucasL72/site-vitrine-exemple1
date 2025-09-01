@@ -21,40 +21,53 @@ function NavBar({ token, onLogout }) {
           <img src={logo} alt="Logo" height="40" />
             <span className="ms-2 title">MonSite</span>
         </Link>
-        <ul className="navbar-nav mx-auto mb-2 mb-lg-0">
-          <li className="nav-item">
-            <Link className="nav-link" to="/">
-              Accueil
-            </Link>
-          </li>
-          <li className="nav-item">
-            <Link className="nav-link" to="/services">
-              Services
-            </Link>
-          </li>
-          <li className="nav-item">
-            <Link className="nav-link" to="/realisations">
-              Réalisations
-            </Link>
-          </li>
-          <li className="nav-item">
-            <Link className="nav-link" to="/apropos">
-              À propos
-            </Link>
-          </li>
-          <li className="nav-item">
-            <Link className="nav-link" to="/contact">
-              Contact
-            </Link>
-          </li>
-          {token && (
+        <button
+          className="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNav"
+          aria-controls="navbarNav"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span className="navbar-toggler-icon"></span>
+        </button>
+        <div className="collapse navbar-collapse" id="navbarNav">
+          <ul className="navbar-nav mx-auto mb-2 mb-lg-0">
             <li className="nav-item">
-              <Link className="nav-link" to="/dashboard">
-                Dashboard
+              <Link className="nav-link" to="/">
+                Accueil
               </Link>
             </li>
-          )}
-        </ul>
+            <li className="nav-item">
+              <Link className="nav-link" to="/services">
+                Services
+              </Link>
+            </li>
+            <li className="nav-item">
+              <Link className="nav-link" to="/realisations">
+                Réalisations
+              </Link>
+            </li>
+            <li className="nav-item">
+              <Link className="nav-link" to="/apropos">
+                À propos
+              </Link>
+            </li>
+            <li className="nav-item">
+              <Link className="nav-link" to="/contact">
+                Contact
+              </Link>
+            </li>
+            {token && (
+              <li className="nav-item">
+                <Link className="nav-link" to="/dashboard">
+                  Dashboard
+                </Link>
+              </li>
+            )}
+          </ul>
+        </div>
         <div className="d-flex align-items-center">
           <div className="form-check form-switch me-3">
             <input
