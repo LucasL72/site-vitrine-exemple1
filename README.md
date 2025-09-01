@@ -39,6 +39,26 @@ npm start
 
 Le projet utilise le port **5000** pour l'API. L'application React consomme cette API via l'URL `http://localhost:5000` définie dans `REACT_APP_API_URL`.
 
+## Authentification administrateur
+
+L'espace d'administration utilise désormais l'**email** et le mot de passe de l'utilisateur pour se connecter.
+
+### Migration de la table `users`
+
+Une migration SQL est fournie pour renommer la colonne `username` en `email` et ajouter une contrainte d'unicité :
+
+```sql
+ALTER TABLE users
+  CHANGE COLUMN username email VARCHAR(255) NOT NULL,
+  ADD UNIQUE KEY unique_email (email);
+```
+
+Exécuter cette migration avec :
+
+```bash
+mysql -u <user> -p <db_name> < my-api/migrations/001_use_email_for_admin.sql
+```
+
 ## Scripts disponibles
 
 ### API (`my-api`)

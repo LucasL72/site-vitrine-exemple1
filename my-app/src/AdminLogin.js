@@ -3,14 +3,14 @@ import { useNavigate } from 'react-router-dom';
 import { login } from './services/api';
 
 function AdminLogin({ onLogin }) {
-  const [email, setEmail] = useState('');
+  const [loginEmail, setLoginEmail] = useState('');
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const data = await login({ email, password });
+      const data = await login({ email: loginEmail, password });
       localStorage.setItem('token', data.token);
       onLogin && onLogin(data.token);
       navigate('/dashboard');
@@ -24,9 +24,9 @@ function AdminLogin({ onLogin }) {
       <h2>Connexion Admin</h2>
       <input
         type="email"
-        placeholder="Email"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
+        placeholder="Adresse e-mail"
+        value={loginEmail}
+        onChange={(e) => setLoginEmail(e.target.value)}
         required
       />
       <input
