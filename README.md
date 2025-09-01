@@ -59,6 +59,28 @@ Exécuter cette migration avec :
 mysql -u <user> -p <db_name> < my-api/migrations/001_use_email_for_admin.sql
 ```
 
+## Formulaire de contact
+
+L'API fournit une route `POST /contact` pour permettre aux visiteurs d'envoyer un message.
+
+### Requête
+
+```json
+{
+  "name": "Jean Dupont",
+  "email": "jean@example.com",
+  "message": "Bonjour"
+}
+```
+
+Les champs sont validés et nettoyés avant l'enregistrement en base de données.
+
+### Réponses
+
+- `201` : message enregistré.
+- `400` : données invalides.
+- `500` : erreur serveur.
+
 ## Scripts disponibles
 
 ### API (`my-api`)
