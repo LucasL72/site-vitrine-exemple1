@@ -8,7 +8,6 @@ import AdminLogin from './AdminLogin';
 import Dashboard from './Dashboard';
 import RealisationFormPage from './RealisationFormPage';
 import NavBar from './components/NavBar';
-import './App.css';
 
 function App() {
   const [token, setToken] = useState(localStorage.getItem('token'));
