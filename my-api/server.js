@@ -39,16 +39,16 @@ function verifyToken(req, res, next) {
 }
 
 app.post('/login', (req, res) => {
-  const { username, password } = req.body;
-  const sql = 'SELECT * FROM users WHERE username = ? AND password = ?';
-  db.query(sql, [username, password], (err, results) => {
+  const { email, password } = req.body;
+  const sql = 'SELECT * FROM users WHERE email = ? AND password = ?';
+  db.query(sql, [email, password], (err, results) => {
     if (err) {
       return res.status(500).json({ error: err });
     }
     if (results.length === 0) {
       return res.status(401).json({ message: 'Identifiants invalides' });
     }
-    const user = { id: results[0].id, username: results[0].username };
+    const user = { id: results[0].id, email: results[0].email };
     const token = jwt.sign(user, process.env.JWT_SECRET, { expiresIn: '1h' });
     res.json({ token });
   });
